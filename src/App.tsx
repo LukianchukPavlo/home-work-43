@@ -1,6 +1,7 @@
 import './App.css'
 import { createHashRouter, RouterProvider } from 'react-router-dom'
-import { Home, User1, User2, User3 } from "./components"
+import { Home } from "./components"
+import UserWrapper from './components/UserWrapper'
 
 function App() {
   const router = createHashRouter([
@@ -8,16 +9,9 @@ function App() {
       path: "/",
       element: <Home />
     },
-    { path: "/User1",
-      element: <User1 />
+    { path: "/User/:id",
+      element: <UserWrapper />
     },   
-    { path: "/User2",
-      element: <User2 />
-    },
-    {
-      path: "/User3",
-      element: <User3 />
-    },
     {
       path: "*",
       element: <h1> Page not found </h1>
