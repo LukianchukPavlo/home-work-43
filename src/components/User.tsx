@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import  Axios  from 'axios';
 import { NavLink } from "react-router-dom";
+import { useTheme } from "./ThemeContext"
+import { useNavStyle } from "./navStyle"
 
 export type UserType = {
   id: number;
@@ -19,7 +21,9 @@ type UserProps = {
 export default function User({ userId }: UserProps) {
     const [user, setUser] = useState<UserType | null >(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('')
+    const [error, setError] = useState('');
+    const { toggleTheme, theme, colors } = useTheme()
+    const navStyle = useNavStyle()
   
     useEffect (() => {
         let isMounted = true;
@@ -45,7 +49,9 @@ export default function User({ userId }: UserProps) {
     if (!user) return null;
 
     return (
-    <div>
+    <body style={{ backgroundColor: colors.backgroundColor, color: colors.textColor, minHeight: "100vh", padding: "20px" }}>
+      
+
       <NavLink to="/" style={navStyle}>Home</NavLink> {" || "}
       <NavLink to="/user/1" style={navStyle}>User 1</NavLink> {" || "}
       <NavLink to="/user/2" style={navStyle}>User 2</NavLink> {" || "}
@@ -57,13 +63,11 @@ export default function User({ userId }: UserProps) {
       <p><strong>Phone:</strong> {user.phone}</p>
       <p><strong>Username:</strong> {user.username}</p>
       <p><strong>Website:</strong> {user.website}</p>
-    </div>
+
+      <button onClick={toggleTheme}>
+        Toggle Theme ({theme})
+      </button>
+    </body>
   )
 }
-
-const navStyle = ({ isActive }: { isActive: boolean }) => ({
-  color: isActive ? "red" : "blue",
-  textDecoration: isActive ? "underline" : "none",
-  fontWeight: isActive ? "bold" : "normal",
-})
 ;

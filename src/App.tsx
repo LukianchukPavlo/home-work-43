@@ -1,7 +1,8 @@
 import './App.css'
 import { createHashRouter, RouterProvider } from 'react-router-dom'
 import { Home } from "./components"
-import UserWrapper from './components/UserWrapper'
+import { UserWrapper } from './components'
+import { ThemeProvider } from './components/ThemeContext'
 
 function App() {
   const router = createHashRouter([
@@ -20,7 +21,9 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={router} />
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </>
   )
 }
