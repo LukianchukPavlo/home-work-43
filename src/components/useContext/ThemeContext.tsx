@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, type ReactNode } from "react"
+import { useEffect } from "react"
 
 const colors = {
     light: {
@@ -33,6 +34,11 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const toggleTheme = () => {
     setTheme(prev => (prev === "light" ? "dark" : "light"))
   }
+
+  useEffect(() => {
+  document.body.classList.remove("light", "dark")
+  document.body.classList.add(theme)
+}, [theme])
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme, colors: colors[theme] }}>

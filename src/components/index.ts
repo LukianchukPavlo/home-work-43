@@ -1,5 +1,4 @@
-export { default as Home } from "./Home"
-export { default as User1 } from "./User1"
-export { default as User2 } from "./User2"
-export { default as User3 } from "./User3"
+export { default as Home } from "./pages/Home"
 export { default as UserWrapper } from "./UserWrapper"
+export { default as User } from "./User/User"
+export { default as Layout } from "./Layout"

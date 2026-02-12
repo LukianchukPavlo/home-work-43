@@ -1,5 +1,5 @@
 import type { NavLinkProps } from "react-router-dom"
-import { useTheme } from "./ThemeContext"
+import { useTheme } from "./useContext/ThemeContext"
 
 export const useNavStyle = (): NavLinkProps["style"] => {
   const { theme } = useTheme()

@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom"
-import User from "./User"
+import User from "./User/User"
 
 export default function UserWrapper() {
   const { id } = useParams()
