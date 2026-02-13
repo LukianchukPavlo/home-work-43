@@ -6,7 +6,9 @@ export default function UserWrapper() {
 
   const userId = Number(id)
 
-  if (!userId) return <h1> User not found </h1>
+  if (isNaN(userId)) {
+    return <h1>User not found</h1>
+  }
 
   return <User userId={userId} />
 }

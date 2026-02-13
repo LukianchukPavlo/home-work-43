@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import { createSlice, createAsyncThunk, type PayloadAction } from "@reduxjs/toolkit"
 import axios from "axios"
 
 export interface User {
@@ -22,10 +22,10 @@ const initialState: UsersState = {
   error: null,
 }
 
-export const fetchUserById = createAsyncThunk(
+export const fetchUserById = createAsyncThunk<User, number>(
     "users/fetchById",
     async (id: number) => {
-        const responce = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)
+        const responce = await axios.get<User>(`https://jsonplaceholder.typicode.com/users/${id}`)
         return responce.data
     }
 )
@@ -40,7 +40,7 @@ const usersSlice = createSlice({
         state.loading = true
         state.error = null
       })
-      .addCase(fetchUserById.fulfilled, (state, action) => {
+      .addCase(fetchUserById.fulfilled, (state, action: PayloadAction<User>) => {
         state.loading = false
         state.user = action.payload
       })

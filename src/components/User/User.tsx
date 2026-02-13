@@ -1,51 +1,59 @@
-import { useState, useEffect } from "react";
-import  Axios  from 'axios';
+import { useEffect } from "react";
+// import  Axios  from 'axios';
+import { useDispatch, useSelector } from "react-redux"
 // import { useTheme } from "../useContext/ThemeContext"
+import type { RootState, AppDispatch } from "../../redux/store"
+import { fetchUserById } from "../../redux/slices/usersSlice"
 
 
 
-
-export type UserType = {
-  id: number;
-  name: string;
-  email: string;
-  phone: string;
-  username: string;
-  website: string;
-};
+// export type UserType = {
+//   id: number;
+//   name: string;
+//   email: string;
+//   phone: string;
+//   username: string;
+//   website: string;
+// };
 
 type UserProps = {
     userId: number;
 }
 
 
-export default function User({ userId }: UserProps) {
-    const [user, setUser] = useState<UserType | null >(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
-    
+export default function User({ userId }: UserProps){
+    // const [user, setUser] = useState<UserType | null >(null);
+    // const [loading, setLoading] = useState(true);
+    // const [error, setError] = useState('');
+    const dispatch = useDispatch<AppDispatch>()
+
+    const { user, loading, error } = useSelector(
+    (state: RootState) => state.users)
+  
 
     // const { toggleTheme, theme } = useTheme()
     // const navStyle = useNavStyle()
   
     useEffect (() => {
-        let isMounted = true;
-        const loadUser = async () => {
-        try {
-        const response = await Axios.get(`https://jsonplaceholder.typicode.com/users/${userId}`);
-        if (isMounted) setUser(response.data);
-        }  catch {
-        if (isMounted) setError("Error loading user");
-        }  finally {
-        if (isMounted) setLoading(false);
-        }
-    }
-        loadUser();
+    //     let isMounted = true;
+    //     const loadUser = async () => {
+    //     try {
+    //     const response = await Axios.get(`https://jsonplaceholder.typicode.com/users/${userId}`);
+    //     if (isMounted) setUser(response.data);
+    //     }  catch {
+    //     if (isMounted) setError("Error loading user");
+    //     }  finally {
+    //     if (isMounted) setLoading(false);
+    //     }
+    // }
+    //     loadUser();
 
-        return () => {
-            isMounted = false;
-        }
-    }, [userId]);
+    //     return () => {
+    //         isMounted = false;
+    //     }
+    // }, [userId]);
+        dispatch(fetchUserById(userId))
+    }, [dispatch, userId])
 
     if (error) return <h1>{error}</h1>
     if (loading) return <h1>Loading...</h1>
@@ -59,7 +67,6 @@ export default function User({ userId }: UserProps) {
       <p><strong>Phone:</strong> {user.phone}</p>
       <p><strong>Username:</strong> {user.username}</p>
       <p><strong>Website:</strong> {user.website}</p>
-
       {/* <button onClick={() => dispatch(toggleTheme())}>
               Toggle Theme ({theme})
       </button> */}
