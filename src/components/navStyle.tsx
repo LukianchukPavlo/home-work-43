@@ -12,11 +12,11 @@ export const useNavStyle = (): NavLinkProps["style"] => {
       : theme === "light"
       ? "blue"
       : "lightblue",
-    backgroundColor: isActive
-      ? theme === "light"
-        ? "#eee"
-        : "#444"
-        : "transparent",
+    // backgroundColor: isActive
+    //   ? theme === "light"
+    //     ? "#eee"
+    //     : "#444"
+    //     : "transparent",
     textDecoration: isActive ? "underline" : "none",
     fontWeight: isActive ? "bold" : "normal",
     

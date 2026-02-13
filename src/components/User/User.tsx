@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import  Axios  from 'axios';
-import { useTheme } from "../useContext/ThemeContext"
+// import { useTheme } from "../useContext/ThemeContext"
+
+
 
 
 export type UserType = {
@@ -21,7 +23,9 @@ export default function User({ userId }: UserProps) {
     const [user, setUser] = useState<UserType | null >(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const { toggleTheme, theme } = useTheme()
+    
+
+    // const { toggleTheme, theme } = useTheme()
     // const navStyle = useNavStyle()
   
     useEffect (() => {
@@ -49,10 +53,6 @@ export default function User({ userId }: UserProps) {
 
     return (
     <div>
-      
-
-      
-
       <h2>User data:</h2>
       <p><strong>Name:</strong> {user.name}</p>
       <p><strong>Email:</strong> {user.email}</p>
@@ -60,9 +60,9 @@ export default function User({ userId }: UserProps) {
       <p><strong>Username:</strong> {user.username}</p>
       <p><strong>Website:</strong> {user.website}</p>
 
-      <button onClick={toggleTheme}>
-        Toggle Theme ({theme})
-      </button>
+      {/* <button onClick={() => dispatch(toggleTheme())}>
+              Toggle Theme ({theme})
+      </button> */}
     </div>
   )
 }
